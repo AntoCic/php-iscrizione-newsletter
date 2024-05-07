@@ -1,7 +1,7 @@
 <?php
 session_start();
 if (isset($_SESSION['email'])) {
-    require './utilities.php';
+    require_once './utilities.php';
     $email = $_SESSION['email'];
     session_unset();
 } else {
@@ -20,22 +20,22 @@ if (isset($_SESSION['email'])) {
 </head>
 
 <body>
-    <?php
-    if (isCorrectEmail($email)) {
-    ?>
-        <div class="alert alert-success" role="alert">
-            Email corretta
-        </div>
-    <?php
-    } else {
-    ?>
-        <div class="alert alert-danger" role="alert">
-            Email errata
-        </div>
-    <?php
-    }
-    ?>
-
+    <a href="./index.php" class="btn btn-outline-dark m-2"><</a>
+            <?php
+            if (isCorrectEmail($email)) {
+            ?>
+                <div class="alert alert-success" role="alert">
+                    Email corretta
+                </div>
+            <?php
+            } else {
+            ?>
+                <div class="alert alert-danger" role="alert">
+                    Email errata
+                </div>
+            <?php
+            }
+            ?>
 </body>
 
 </html>
