@@ -1,13 +1,6 @@
 <?php
 $email = $_POST['email'] ?? null;
-
-function isCorrectEmail($email)
-{
-    if (preg_match("/@\w+\./", $email)) {
-        return true;
-    }
-    return false;
-}
+require './utilities.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -21,34 +14,37 @@ function isCorrectEmail($email)
 </head>
 
 <body>
-    <h1>Newsletter</h1>
-    <form action="" method="post">
-        <div class="input-group my-1">
-            <span class="input-group-text">EMAIL</span>
-            <input type="text" name="email" class="form-control" placeholder="email@email.com">
-        </div>
-
-        <button type="submit" class="btn btn-success">INVIA</button>
-    </form>
-    <?php
-    if ($email) {
-        if (isCorrectEmail($email)) {
-    ?>
-            <div class="alert alert-success" role="alert">
-                Email corretta
+    <?php include __DIR__ . '/template/header.php'; ?>
+    <div class="container">
+        <form action="" method="post">
+            <div class="input-group my-1">
+                <span class="input-group-text">EMAIL</span>
+                <input type="text" name="email" class="form-control" placeholder="email@email.com">
             </div>
+
+            <button type="submit" class="btn btn-success mb-3">INVIA</button>
+        </form>
         <?php
-        } else {
+        if ($email) {
+            if (isCorrectEmail($email)) {
         ?>
-            <div class="alert alert-danger" role="alert">
-                Email errata
-            </div>
-    <?php
+                <div class="alert alert-success" role="alert">
+                    Email corretta
+                </div>
+            <?php
+            } else {
+            ?>
+                <div class="alert alert-danger" role="alert">
+                    Email errata
+                </div>
+        <?php
+            }
         }
-    }
 
-    ?>
+        ?>
+    </div>
 
+    <?php include __DIR__ . '/template/footer.php'; ?>
 </body>
 
 </html>
