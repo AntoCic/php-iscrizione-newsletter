@@ -1,6 +1,11 @@
 <?php
 $email = $_POST['email'] ?? null;
-require './utilities.php';
+if ($email) {
+    session_start();
+    $_SESSION['email'] = $email;
+    // redirect
+    header('Location: ./subscription.php');
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -24,26 +29,7 @@ require './utilities.php';
 
             <button type="submit" class="btn btn-success mb-3">INVIA</button>
         </form>
-        <?php
-        if ($email) {
-            if (isCorrectEmail($email)) {
-        ?>
-                <div class="alert alert-success" role="alert">
-                    Email corretta
-                </div>
-            <?php
-            } else {
-            ?>
-                <div class="alert alert-danger" role="alert">
-                    Email errata
-                </div>
-        <?php
-            }
-        }
-
-        ?>
     </div>
-
     <?php include __DIR__ . '/template/footer.php'; ?>
 </body>
 
